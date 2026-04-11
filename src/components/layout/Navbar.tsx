@@ -15,6 +15,7 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDark, setIsDark] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     // Set default theme to dark
@@ -79,28 +80,43 @@ export default function Navbar() {
           <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </Button>
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger render={<Button variant="ghost" size="icon" />}>
               <Menu />
             </SheetTrigger>
-            <SheetContent side="right" className="bg-background border-border">
-              <div className="flex flex-col gap-8 mt-12">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-2xl font-display font-medium hover:text-muted-foreground transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                ))}
-                <div className="flex items-center gap-6 mt-4">
-                  <a href="https://github.com/Abhinabmishra" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                    <Github size={24} />
-                  </a>
-                  <a href="https://www.linkedin.com/in/abhinabmishra/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                    <Linkedin size={24} />
-                  </a>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background border-l border-border p-0">
+              <div className="flex flex-col h-full p-8">
+                <div className="flex items-center justify-between mb-12">
+                  <span className="text-xl font-display font-bold tracking-tighter">
+                    MENU<span className="text-muted-foreground">.</span>
+                  </span>
+                </div>
+                
+                <div className="flex flex-col gap-6">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-3xl font-display font-bold tracking-tight hover:text-muted-foreground transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
+
+                <div className="mt-auto pt-8 border-t border-border">
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground mb-6">Socials</p>
+                  <div className="flex items-center gap-6">
+                    <a href="https://github.com/Abhinabmishra" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
+                      <Github size={24} />
+                      <span className="text-sm font-medium">GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abhinabmishra/" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
+                      <Linkedin size={24} />
+                      <span className="text-sm font-medium">LinkedIn</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </SheetContent>
