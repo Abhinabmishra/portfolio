@@ -54,21 +54,21 @@ export default function Skills() {
                     key={skill}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: false, margin: "-20px" }}
+                    viewport={{ once: true, margin: "-20px" }}
                     transition={{ 
-                      duration: 0.3, 
-                      delay: skillIndex * 0.05,
                       type: "spring",
-                      stiffness: 260,
-                      damping: 20 
+                      stiffness: 100,
+                      damping: 20,
+                      delay: skillIndex * 0.05
                     }}
                     whileHover={{ 
-                      scale: 1.05, 
-                      borderColor: "var(--color-primary)",
-                      backgroundColor: "rgba(255, 255, 255, 0.08)",
-                      boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)"
+                      scale: 1.02, 
+                      borderColor: "var(--ring)",
+                      backgroundColor: "var(--accent)",
+                      boxShadow: "0 0 20px rgba(0, 0, 0, 0.05)"
                     }}
-                    className="px-4 py-2 rounded-lg bg-secondary/50 border border-border text-sm font-medium transition-all cursor-default"
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 rounded-xl bg-card/40 backdrop-blur-md border border-border text-sm font-medium transition-all cursor-default"
                   >
                     {skill}
                   </motion.div>

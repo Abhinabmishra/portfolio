@@ -42,8 +42,9 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border py-4" : "bg-transparent py-6"
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled ? "bg-background/40 backdrop-blur-xl border-b border-border py-4" : "bg-transparent py-6"
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
@@ -112,18 +113,19 @@ export default function Navbar() {
                   </span>
                 </div>
                 
-                <div className="flex flex-col gap-6">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-3xl font-display font-bold tracking-tight hover:text-muted-foreground transition-colors"
-                    >
-                      {link.name}
-                    </a>
-                  ))}
-                </div>
+                  <div className="flex flex-col gap-6">
+                    {navLinks.map((link) => (
+                      <motion.a
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        whileTap={{ x: 10, color: "var(--primary)" }}
+                        className="text-3xl font-display font-bold tracking-tight hover:text-muted-foreground transition-colors"
+                      >
+                        {link.name}
+                      </motion.a>
+                    ))}
+                  </div>
 
                 <div className="mt-auto pt-8 border-t border-border">
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-6">Socials</p>

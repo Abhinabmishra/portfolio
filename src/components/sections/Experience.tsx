@@ -67,15 +67,21 @@ export default function Experience() {
                 key={exp.company}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false }}
-                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 20,
+                  delay: index * 0.1 
+                }}
               >
-                <button
+                <motion.button
                   onClick={() => setActiveIndex(index)}
+                  whileTap={{ scale: 0.98 }}
                   className={`w-full text-left p-6 rounded-2xl border transition-all duration-300 group ${
                     activeIndex === index
-                      ? "bg-background border-primary shadow-xl"
-                      : "bg-transparent border-border hover:border-muted-foreground/30"
+                      ? "bg-card/40 backdrop-blur-xl border-border shadow-2xl"
+                      : "bg-transparent border-border/20 hover:border-border"
                   }`}
                 >
                   <div className="flex justify-between items-start mb-2">
@@ -85,7 +91,7 @@ export default function Experience() {
                     <ChevronRight className={`transition-transform duration-300 ${activeIndex === index ? "rotate-90 text-primary" : "text-muted-foreground"}`} size={18} />
                   </div>
                   <p className="text-xs text-muted-foreground uppercase tracking-widest">{exp.period}</p>
-                </button>
+                </motion.button>
               </motion.div>
             ))}
           </div>

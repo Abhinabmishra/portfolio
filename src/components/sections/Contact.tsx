@@ -28,7 +28,7 @@ export default function Contact() {
     setStatus("sending");
 
     try {
-      const response = await fetch("https://formspree.io/f/meepypay", {
+      const response = await fetch("https://formspree.io/f/xwpvjovq", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -89,9 +89,13 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
-            className="bg-background p-8 rounded-2xl border border-border shadow-2xl"
+            viewport={{ once: true }}
+            transition={{ 
+              type: "spring",
+              stiffness: 100,
+              damping: 20
+            }}
+            className="bg-card/40 backdrop-blur-xl p-8 rounded-3xl border border-border shadow-2xl"
           >
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -101,8 +105,7 @@ export default function Contact() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="John Doe" 
-                    className="bg-secondary/30 border-border" 
+                    className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                     required
                   />
                 </div>
@@ -112,9 +115,8 @@ export default function Contact() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="john@example.com" 
                     type="email" 
-                    className="bg-secondary/30 border-border" 
+                    className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                     required
                   />
                 </div>
@@ -126,8 +128,7 @@ export default function Contact() {
                     name="contact"
                     value={formData.contact}
                     onChange={handleChange}
-                    placeholder="+91 00000 00000" 
-                    className="bg-secondary/30 border-border" 
+                    className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                     required
                   />
                 </div>
@@ -137,8 +138,7 @@ export default function Contact() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Role Inquiry" 
-                    className="bg-secondary/30 border-border" 
+                    className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                     required
                   />
                 </div>
@@ -149,8 +149,7 @@ export default function Contact() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell me about the opportunity..." 
-                  className="min-h-[150px] bg-secondary/30 border-border" 
+                  className="min-h-[150px] bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                   required
                 />
               </div>

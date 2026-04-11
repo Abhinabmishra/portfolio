@@ -10,6 +10,34 @@ const typewriterTexts = [
   "DRIVING PRODUCT STRATEGY"
 ];
 
+const DataParticles = () => {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{ 
+            opacity: 0, 
+            y: Math.random() * 1000, 
+            x: Math.random() * 100 + "%" 
+          }}
+          animate={{ 
+            opacity: [0, 0.05, 0],
+            y: [null, -200],
+          }}
+          transition={{ 
+            duration: Math.random() * 10 + 10, 
+            repeat: Infinity, 
+            ease: "linear",
+            delay: Math.random() * 10
+          }}
+          className="absolute w-0.5 h-0.5 bg-foreground/20 rounded-sm"
+        />
+      ))}
+    </div>
+  );
+};
+
 export default function Hero() {
   const [textIndex, setTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -42,6 +70,8 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <DataParticles />
+      
       {/* Background Decorative Elements */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse delay-700" />
@@ -88,14 +118,18 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button size="lg" className="rounded-full px-8 h-14 text-base group" render={<a href="#projects" />} nativeButton={false}>
-              View My Work
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
-            </Button>
-            <Button size="lg" variant="outline" className="rounded-full px-8 h-14 text-base" render={<a href="https://drive.google.com/file/d/1d9S_YT8ZH6Ax049G2DAC-50yy6xXCzOG/view?usp=sharing" target="_blank" rel="noreferrer" />} nativeButton={false}>
-              <Eye className="mr-2" size={18} />
-              View CV
-            </Button>
+            <motion.div whileTap={{ scale: 0.95 }}>
+              <Button size="lg" className="rounded-full px-8 h-14 text-base group" render={<a href="#projects" />} nativeButton={false}>
+                View My Work
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+              </Button>
+            </motion.div>
+            <motion.div whileTap={{ scale: 0.95 }}>
+              <Button size="lg" variant="outline" className="rounded-full px-8 h-14 text-base" render={<a href="https://drive.google.com/file/d/1d9S_YT8ZH6Ax049G2DAC-50yy6xXCzOG/view?usp=sharing" target="_blank" rel="noreferrer" />} nativeButton={false}>
+                <Eye className="mr-2" size={18} />
+                View CV
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </div>

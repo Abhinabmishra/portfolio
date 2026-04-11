@@ -55,12 +55,18 @@ export default function Projects() {
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                type: "spring",
+                stiffness: 100,
+                damping: 20,
+                delay: index * 0.15 
+              }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Card className="overflow-hidden bg-background border-border group hover:shadow-2xl transition-all duration-500">
+              <Card className="overflow-hidden bg-card/40 backdrop-blur-xl border border-border group hover:border-primary/20 transition-all duration-500 rounded-3xl">
                 <div className="relative aspect-video overflow-hidden">
                   <img
                     src={project.image}
@@ -85,7 +91,7 @@ export default function Projects() {
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-[10px] uppercase tracking-wider">
+                        <Badge key={tag} variant="secondary" className="text-[10px] uppercase tracking-wider bg-secondary/50 border-border">
                           {tag}
                         </Badge>
                       ))}

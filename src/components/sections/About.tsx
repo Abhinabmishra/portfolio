@@ -12,24 +12,30 @@ export default function About() {
             transition={{ duration: 0.8, type: "spring" }}
             className="relative"
           >
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden grayscale md:hover:grayscale-0 transition-all duration-700 shadow-2xl relative group">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10 md:hidden"
+              />
               <img
                 src="https://picsum.photos/seed/productmanager/800/1000"
                 alt="Abhinab Mishra"
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full transition-all duration-700 md:grayscale group-hover:grayscale-0"
                 referrerPolicy="no-referrer"
               />
             </div>
             <motion.div 
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={{ delay: 0.5 }}
-              className="absolute -bottom-8 -right-8 w-48 h-48 bg-primary rounded-2xl -z-10" 
+              transition={{ type: "spring", delay: 0.5 }}
+              className="absolute -bottom-8 -right-8 w-48 h-48 bg-card/40 backdrop-blur-3xl border border-border rounded-2xl -z-10" 
             />
             <motion.div 
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              transition={{ delay: 0.7 }}
+              transition={{ type: "spring", delay: 0.7 }}
               className="absolute -top-8 -left-8 w-48 h-48 border border-border rounded-2xl -z-10" 
             />
           </motion.div>
@@ -60,23 +66,24 @@ export default function About() {
                 My approach combines deep technical collaboration with outcome-driven roadmapping, 
                 focusing on reducing operational complexity and driving measurable business impact.
               </p>
-              <div className="grid grid-cols-2 gap-8 pt-8">
-                <div>
-                  <h4 className="text-foreground font-bold text-3xl mb-1">30%</h4>
-                  <p className="text-xs uppercase tracking-widest">Platform Adoption Lift</p>
-                </div>
-                <div>
-                  <h4 className="text-foreground font-bold text-3xl mb-1">2.5k+</h4>
-                  <p className="text-xs uppercase tracking-widest">Hours Reclaimed Annually</p>
-                </div>
-                <div>
-                  <h4 className="text-foreground font-bold text-3xl mb-1">$60M</h4>
-                  <p className="text-xs uppercase tracking-widest">Revenue Impacted</p>
-                </div>
-                <div>
-                  <h4 className="text-foreground font-bold text-3xl mb-1">99.9%</h4>
-                  <p className="text-xs uppercase tracking-widest">System Uptime Maintained</p>
-                </div>
+              <div className="grid grid-cols-2 gap-4 pt-8">
+                {[
+                  { val: "30%", label: "Platform Adoption Lift" },
+                  { val: "2.5k+", label: "Hours Reclaimed Annually" },
+                  { val: "$60M", label: "Revenue Impacted" },
+                  { val: "99.9%", label: "System Uptime Maintained" },
+                ].map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + i * 0.1 }}
+                    className="p-4 rounded-2xl bg-card/40 border border-border backdrop-blur-sm"
+                  >
+                    <h4 className="text-foreground font-bold text-2xl mb-1">{stat.val}</h4>
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground">{stat.label}</p>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>

@@ -5,6 +5,7 @@
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Background from "@/components/layout/Background";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Experience from "@/components/sections/Experience";
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground transition-colors duration-500">
+      <Background />
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-primary z-[60] origin-left"
         style={{ scaleX }}
