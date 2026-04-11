@@ -95,7 +95,7 @@ export default function Contact() {
               stiffness: 100,
               damping: 20
             }}
-            className="bg-card/40 backdrop-blur-xl p-8 rounded-3xl border border-border shadow-2xl"
+            className="bg-card/60 backdrop-blur-md p-8 rounded-3xl border border-border shadow-2xl transition-colors duration-200"
           >
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -12,7 +12,7 @@ export default function About() {
             transition={{ duration: 0.8, type: "spring" }}
             className="relative"
           >
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden grayscale md:hover:grayscale-0 transition-all duration-700 shadow-2xl relative group">
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden grayscale md:hover:grayscale-0 transition-all duration-300 shadow-2xl relative group">
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -22,7 +22,7 @@ export default function About() {
               <img
                 src="https://picsum.photos/seed/productmanager/800/1000"
                 alt="Abhinab Mishra"
-                className="object-cover w-full h-full transition-all duration-700 md:grayscale group-hover:grayscale-0"
+                className="object-cover w-full h-full transition-all duration-300 md:grayscale group-hover:grayscale-0"
                 referrerPolicy="no-referrer"
               />
             </div>

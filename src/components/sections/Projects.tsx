@@ -66,7 +66,7 @@ export default function Projects() {
               }}
               whileTap={{ scale: 0.98 }}
             >
-              <Card className="overflow-hidden bg-card/40 backdrop-blur-xl border border-border group hover:border-primary/20 transition-all duration-500 rounded-3xl">
+              <Card className="overflow-hidden bg-card/60 backdrop-blur-md border border-border group hover:border-primary/20 transition-colors duration-200 rounded-3xl">
                 <div className="relative aspect-video overflow-hidden">
                   <img
                     src={project.image}

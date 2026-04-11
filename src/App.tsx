@@ -23,7 +23,7 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground transition-colors duration-500">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground transition-colors duration-200">
       <Background />
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-primary z-[60] origin-left"

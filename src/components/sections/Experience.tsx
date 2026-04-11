@@ -78,9 +78,9 @@ export default function Experience() {
                 <motion.button
                   onClick={() => setActiveIndex(index)}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full text-left p-6 rounded-2xl border transition-all duration-300 group ${
+                  className={`w-full text-left p-6 rounded-2xl border transition-colors duration-200 group ${
                     activeIndex === index
-                      ? "bg-card/40 backdrop-blur-xl border-border shadow-2xl"
+                      ? "bg-card/60 backdrop-blur-md border-border shadow-2xl"
                       : "bg-transparent border-border/20 hover:border-border"
                   }`}
                 >

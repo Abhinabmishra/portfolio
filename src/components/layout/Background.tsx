@@ -29,7 +29,7 @@ export default function Background() {
         animate={{
           background: `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, var(--flashlight-color), transparent 80%)`,
         }}
-        transition={{ type: "spring", bounce: 0, duration: 0.5 }}
+        transition={{ type: "spring", bounce: 0, duration: 0.3 }}
       />
       
       {/* Ambient Glows */}
