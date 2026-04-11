@@ -82,12 +82,26 @@ export default function Projects() {
                   </div>
                 </div>
                 <CardContent className="p-8">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-[10px] uppercase tracking-wider">
-                        {tag}
-                      </Badge>
-                    ))}
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-[10px] uppercase tracking-wider">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex md:hidden gap-3">
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                          <Github size={18} />
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a href={project.demo} target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                          <ExternalLink size={18} />
+                        </a>
+                      )}
+                    </div>
                   </div>
                   <h3 className="text-2xl font-display font-bold mb-3">{project.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">
