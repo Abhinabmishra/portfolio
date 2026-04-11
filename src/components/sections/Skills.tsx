@@ -62,7 +62,13 @@ export default function Skills() {
                       stiffness: 260,
                       damping: 20 
                     }}
-                    className="px-4 py-2 rounded-lg bg-secondary/50 border border-border text-sm font-medium hover:border-primary/50 transition-colors cursor-default"
+                    whileHover={{ 
+                      scale: 1.05, 
+                      borderColor: "var(--color-primary)",
+                      backgroundColor: "rgba(255, 255, 255, 0.08)",
+                      boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)"
+                    }}
+                    className="px-4 py-2 rounded-lg bg-secondary/50 border border-border text-sm font-medium transition-all cursor-default"
                   >
                     {skill}
                   </motion.div>
