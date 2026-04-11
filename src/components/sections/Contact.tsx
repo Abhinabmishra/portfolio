@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,11 +14,36 @@ export default function Contact() {
     message: ""
   });
 
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
   const isFormValid = Object.values(formData).every(value => typeof value === 'string' && value.trim() !== "");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    try {
+      const response = await fetch("https://formspree.io/f/meepypay", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", contact: "", subject: "", message: "" });
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      setStatus("error");
+    }
   };
 
   return (
@@ -68,7 +93,7 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="bg-background p-8 rounded-2xl border border-border shadow-2xl"
           >
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest text-muted-foreground">Name</label>
@@ -78,6 +103,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="John Doe" 
                     className="bg-secondary/30 border-border" 
+                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -89,6 +115,7 @@ export default function Contact() {
                     placeholder="john@example.com" 
                     type="email" 
                     className="bg-secondary/30 border-border" 
+                    required
                   />
                 </div>
               </div>
@@ -101,6 +128,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="+91 00000 00000" 
                     className="bg-secondary/30 border-border" 
+                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -111,6 +139,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Role Inquiry" 
                     className="bg-secondary/30 border-border" 
+                    required
                   />
                 </div>
               </div>
@@ -122,14 +151,19 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Tell me about the opportunity..." 
                   className="min-h-[150px] bg-secondary/30 border-border" 
+                  required
                 />
               </div>
               <Button 
-                disabled={!isFormValid}
+                type="submit"
+                disabled={!isFormValid || status === "sending"}
                 className="w-full h-14 rounded-xl text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {status === "sending" ? "Sending..." : status === "success" ? "Message Sent!" : status === "error" ? "Error! Try Again" : "Send Message"}
               </Button>
+              {status === "success" && (
+                <p className="text-green-500 text-center text-sm mt-2">Thanks! I'll get back to you soon.</p>
+              )}
             </form>
           </motion.div>
         </div>
