@@ -63,8 +63,18 @@ export default function Navbar() {
             </a>
           ))}
           <div className="flex items-center gap-4 ml-4 border-l border-border pl-8">
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full relative overflow-hidden">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={isDark ? "dark" : "light"}
+                  initial={{ y: 20, opacity: 0, rotate: -90 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0 }}
+                  exit={{ y: -20, opacity: 0, rotate: 90 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                </motion.div>
+              </AnimatePresence>
             </Button>
             <a href="https://github.com/Abhinabmishra" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
               <Github size={20} />
@@ -77,8 +87,18 @@ export default function Navbar() {
 
         {/* Mobile Nav */}
         <div className="md:hidden flex items-center gap-2">
-          <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full relative overflow-hidden">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={isDark ? "dark" : "light"}
+                initial={{ y: 20, opacity: 0, rotate: -90 }}
+                animate={{ y: 0, opacity: 1, rotate: 0 }}
+                exit={{ y: -20, opacity: 0, rotate: 90 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              </motion.div>
+            </AnimatePresence>
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger render={<Button variant="ghost" size="icon" />}>
