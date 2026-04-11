@@ -14,7 +14,14 @@ const experiences = [
       { title: "Product Manager", period: "Aug 2021 - Mar 2024" },
       { title: "Product Manager Intern", period: "Jan 2021 - Jul 2021" },
     ],
-    description: "Leading the evolution of data-intensive, revenue-critical advertising platforms. I've successfully managed a $60M revenue-impacting platform while maintaining 99.9% uptime. My work focuses on building AI-assisted workflow orchestration engines that reduced manual reconciliation time by 98%, re-architecting serial execution flows into parallel SLA-driven pipelines, and scaling platform usage across 7 broadcast networks. I bridge the gap between complex B2B requirements and high-performance engineering delivery.",
+    description: [
+      "Leading the evolution of data-intensive, revenue-critical advertising platforms.",
+      "Successfully managed a $60M revenue-impacting platform while maintaining 99.9% uptime.",
+      "Built AI-assisted workflow orchestration engines that reduced manual reconciliation time by 98%.",
+      "Re-architected serial execution flows into parallel SLA-driven pipelines.",
+      "Scaled platform usage across 7 broadcast networks.",
+      "Bridging the gap between complex B2B requirements and high-performance engineering delivery."
+    ],
   },
   {
     company: "KingSoft Software India Pvt Ltd (WPS Office)",
@@ -23,7 +30,11 @@ const experiences = [
     roles: [
       { title: "Assistant Product Manager", period: "Oct 2019 - Jun 2020" },
     ],
-    description: "Focused on consumer onboarding, discovery, and engagement for WPS Office productivity products in India. I drove an 18% increase in activation and retention by redesigning onboarding flows using behavioral segmentation and usage analytics. Additionally, I achieved a 12% lift in daily active usage by optimizing feature exposure and messaging based on user behavior insights.",
+    description: [
+      "Focused on consumer onboarding, discovery, and engagement for WPS Office productivity products in India.",
+      "Drove an 18% increase in activation and retention by redesigning onboarding flows using behavioral segmentation.",
+      "Achieved a 12% lift in daily active usage by optimizing feature exposure and messaging based on user behavior insights."
+    ],
   },
 ];
 
@@ -112,10 +123,21 @@ export default function Experience() {
                       ))}
                     </div>
 
-                    <div className="prose prose-invert max-w-none">
-                      <p className="text-lg text-muted-foreground leading-relaxed">
-                        {experiences[activeIndex].description}
-                      </p>
+                    <div className="space-y-4">
+                      {experiences[activeIndex].description.map((point, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: i * 0.2 }}
+                          className="flex gap-3"
+                        >
+                          <span className="text-primary mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
+                          <p className="text-lg text-muted-foreground leading-relaxed">
+                            {point}
+                          </p>
+                        </motion.div>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
