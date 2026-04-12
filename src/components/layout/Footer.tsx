@@ -144,6 +144,8 @@ export default function Footer() {
         console.log("Stats document does not exist yet.");
       }
     }, (error) => {
+      console.error("Firestore onSnapshot error:", error);
+      setVisitorCount(-1);
       handleFirestoreError(error, OperationType.GET, "stats/global");
     });
 
@@ -176,7 +178,7 @@ export default function Footer() {
               </a>
             </div>
             <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/50">
-              Unique Visitors: {visitorCount !== null ? visitorCount : "..."}
+              Unique Visitors: {visitorCount === -1 ? "Error" : (visitorCount !== null ? visitorCount : "...")}
             </p>
           </div>
         </div>
