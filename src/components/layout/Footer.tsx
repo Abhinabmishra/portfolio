@@ -97,36 +97,32 @@ export default function Footer() {
           }
           
           // 3. Increment global counter
-          let statsSnap;
+          await ensureStatsInitialized(statsRef);
           try {
-            statsSnap = await getDoc(statsRef);
+            await updateDoc(statsRef, {
+              totalUniqueVisitors: increment(1)
+            });
           } catch (e) {
-            handleFirestoreError(e, OperationType.GET, "stats/global");
-            return;
-          }
-
-          if (!statsSnap.exists()) {
-            console.log("Initializing global stats...");
-            try {
-              await setDoc(statsRef, { totalUniqueVisitors: 1 });
-            } catch (e) {
-              handleFirestoreError(e, OperationType.CREATE, "stats/global");
-            }
-          } else {
-            console.log("Incrementing global stats...");
-            try {
-              await updateDoc(statsRef, {
-                totalUniqueVisitors: increment(1)
-              });
-            } catch (e) {
-              handleFirestoreError(e, OperationType.UPDATE, "stats/global");
-            }
+            handleFirestoreError(e, OperationType.UPDATE, "stats/global");
           }
         } else {
-          console.log("Returning visitor detected.");
+          console.log("Returning visitor detected. Ensuring stats exist...");
+          await ensureStatsInitialized(statsRef);
         }
       } catch (error) {
         console.error("Error in trackVisitor:", error);
+      }
+    };
+
+    const ensureStatsInitialized = async (statsRef: any) => {
+      try {
+        const statsSnap = await getDoc(statsRef);
+        if (!statsSnap.exists()) {
+          console.log("Initializing global stats...");
+          await setDoc(statsRef, { totalUniqueVisitors: 1 });
+        }
+      } catch (e) {
+        handleFirestoreError(e, OperationType.GET, "stats/global");
       }
     };
 
