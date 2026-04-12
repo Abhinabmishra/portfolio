@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isValidVisitor(data) {
+      return data.keys().hasAll(['timestamp']) &&
+             data.timestamp is string;
+    }
+
+    function isValidStats(data) {
+      return data.keys().hasAll(['totalUniqueVisitors']) &&
+             data.totalUniqueVisitors is number &&
+             data.totalUniqueVisitors >= 0;
+    }
+
+    // Visitors collection
+    match /visitors/{ipHash} {
+      // Allow anyone to check if they exist and create if they don't
+      allow get: if true;
+      allow create: if isValidVisitor(request.resource.data) && 
+                    ipHash.size() > 0 && ipHash.size() < 128;
+    }
+
+    // Global stats
+    match /stats/global {
+      allow read: if true;
+      allow create: if isValidStats(request.resource.data) &&
+                    request.resource.data.totalUniqueVisitors == 1;
+      allow update: if isValidStats(request.resource.data) &&
+                    request.resource.data.totalUniqueVisitors == resource.data.totalUniqueVisitors + 1;
+    }
+  }
+}

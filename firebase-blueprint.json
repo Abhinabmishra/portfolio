@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "Visitor": {
+      "title": "Visitor",
+      "description": "Represents a unique visitor to the site identified by IP.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the visitor first arrived."
+        }
+      },
+      "required": ["timestamp"]
+    },
+    "Stats": {
+      "title": "Stats",
+      "description": "Global statistics for the site.",
+      "type": "object",
+      "properties": {
+        "totalUniqueVisitors": {
+          "type": "number",
+          "description": "The total number of unique visitors."
+        }
+      },
+      "required": ["totalUniqueVisitors"]
+    }
+  },
+  "firestore": {
+    "/visitors/{ipHash}": {
+      "schema": "Visitor",
+      "description": "Collection of unique visitors."
+    },
+    "/stats/global": {
+      "schema": "Stats",
+      "description": "Global stats document."
+    }
+  }
+}
