@@ -51,6 +51,7 @@ jobs:
           VITE_FIREBASE_APP_ID: ${{ vars.VITE_FIREBASE_APP_ID }}
           VITE_FIREBASE_MEASUREMENT_ID: ${{ vars.VITE_FIREBASE_MEASUREMENT_ID }}
           VITE_FIREBASE_DATABASE_ID: ${{ vars.VITE_FIREBASE_DATABASE_ID }}
+          VITE_FORMSPREE_ID: ${{ vars.VITE_FORMSPREE_ID }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
