@@ -34,7 +34,7 @@ export default function Contact() {
     setStatus("sending");
 
     try {
-      const formId = import.meta.env.VITE_FORMSPREE_ID || "xwpvjovq";
+      const formId = import.meta.env.VITE_FORMSPREE_ID || "meepypay";
       const response = await fetch(`https://formspree.io/f/${formId}`, {
         method: "POST",
         headers: { 
