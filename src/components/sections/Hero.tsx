@@ -125,7 +125,7 @@ export default function Hero() {
               </Button>
             </motion.div>
             <motion.div whileTap={{ scale: 0.95 }}>
-              <Button size="lg" variant="outline" className="rounded-full px-8 h-14 text-base" render={<a href="https://drive.google.com/file/d/1d9S_YT8ZH6Ax049G2DAC-50yy6xXCzOG/view?usp=sharing" target="_blank" rel="noreferrer" />} nativeButton={false}>
+              <Button size="lg" variant="outline" className="rounded-full px-8 h-14 text-base" render={<a href="https://drive.google.com/file/d/1TIqKV4J6452tJ3RBbpGuHdxp8t2tTfos/view?usp=sharing" target="_blank" rel="noreferrer" />} nativeButton={false}>
                 <Eye className="mr-2" size={18} />
                 View CV
               </Button>
