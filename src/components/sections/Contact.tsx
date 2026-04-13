@@ -16,7 +16,11 @@ export default function Contact() {
 
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const isFormValid = Object.values(formData).every(value => typeof value === 'string' && value.trim() !== "");
+  const isFormValid = 
+    formData.name.trim() !== "" && 
+    formData.email.trim() !== "" && 
+    formData.subject.trim() !== "" && 
+    formData.message.trim() !== "";
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -25,12 +29,18 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!isFormValid) return;
+    
     setStatus("sending");
 
     try {
-      const response = await fetch("https://formspree.io/f/xwpvjovq", {
+      const formId = import.meta.env.VITE_FORMSPREE_ID || "xwpvjovq";
+      const response = await fetch(`https://formspree.io/f/${formId}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: JSON.stringify(formData),
       });
 
@@ -39,9 +49,12 @@ export default function Contact() {
         setFormData({ name: "", email: "", contact: "", subject: "", message: "" });
         setTimeout(() => setStatus("idle"), 5000);
       } else {
+        const data = await response.json();
+        console.error("Formspree error:", data);
         setStatus("error");
       }
     } catch (error) {
+      console.error("Submission error:", error);
       setStatus("error");
     }
   };
@@ -129,7 +142,6 @@ export default function Contact() {
                     value={formData.contact}
                     onChange={handleChange}
                     className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
-                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -158,10 +170,13 @@ export default function Contact() {
                 disabled={!isFormValid || status === "sending"}
                 className="w-full h-14 rounded-xl text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {status === "sending" ? "Sending..." : status === "success" ? "Message Sent!" : status === "error" ? "Error! Try Again" : "Send Message"}
+                {status === "sending" ? "Sending..." : status === "success" ? "Message Sent!" : status === "error" ? "Error! Check Formspree ID" : "Send Message"}
               </Button>
               {status === "success" && (
                 <p className="text-green-500 text-center text-sm mt-2">Thanks! I'll get back to you soon.</p>
+              )}
+              {status === "error" && (
+                <p className="text-destructive text-center text-sm mt-2">Something went wrong. Please check your Formspree ID or try again later.</p>
               )}
             </form>
           </motion.div>
