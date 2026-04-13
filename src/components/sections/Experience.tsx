@@ -138,7 +138,7 @@ export default function Experience() {
                           transition={{ duration: 0.4, delay: i * 0.2 }}
                           className="flex gap-3"
                         >
-                          <span className="text-primary mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
+                          <span className="text-primary mt-2.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
                           <p className="text-lg text-muted-foreground leading-relaxed">
                             {point}
                           </p>
