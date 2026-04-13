@@ -112,8 +112,12 @@ export default function Contact() {
           >
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-muted-foreground">Name</label>
+                <motion.div 
+                  className="space-y-2"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <label className="text-xs uppercase tracking-widest text-muted-foreground">Name <span className="text-primary">*</span></label>
                   <Input 
                     name="name"
                     value={formData.name}
@@ -121,9 +125,13 @@ export default function Contact() {
                     className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                     required
                   />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-muted-foreground">Email</label>
+                </motion.div>
+                <motion.div 
+                  className="space-y-2"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <label className="text-xs uppercase tracking-widest text-muted-foreground">Email <span className="text-primary">*</span></label>
                   <Input 
                     name="email"
                     value={formData.email}
@@ -132,10 +140,14 @@ export default function Contact() {
                     className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                     required
                   />
-                </div>
+                </motion.div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
+                <motion.div 
+                  className="space-y-2"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
                   <label className="text-xs uppercase tracking-widest text-muted-foreground">Contact Number</label>
                   <Input 
                     name="contact"
@@ -143,9 +155,13 @@ export default function Contact() {
                     onChange={handleChange}
                     className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                   />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-muted-foreground">Subject</label>
+                </motion.div>
+                <motion.div 
+                  className="space-y-2"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <label className="text-xs uppercase tracking-widest text-muted-foreground">Subject <span className="text-primary">*</span></label>
                   <Input 
                     name="subject"
                     value={formData.subject}
@@ -153,10 +169,14 @@ export default function Contact() {
                     className="bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                     required
                   />
-                </div>
+                </motion.div>
               </div>
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-muted-foreground">Message</label>
+              <motion.div 
+                className="space-y-2"
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <label className="text-xs uppercase tracking-widest text-muted-foreground">Message <span className="text-primary">*</span></label>
                 <Textarea 
                   name="message"
                   value={formData.message}
@@ -164,19 +184,24 @@ export default function Contact() {
                   className="min-h-[150px] bg-secondary/50 border-border focus:border-primary/20 transition-all" 
                   required
                 />
-              </div>
-              <Button 
-                type="submit"
-                disabled={!isFormValid || status === "sending"}
-                className="w-full h-14 rounded-xl text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
               >
-                {status === "sending" ? "Sending..." : status === "success" ? "Message Sent!" : status === "error" ? "Error! Check Formspree ID" : "Send Message"}
-              </Button>
+                <Button 
+                  type="submit"
+                  disabled={!isFormValid || status === "sending"}
+                  className="w-full h-14 rounded-xl text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-primary/20 transition-all"
+                >
+                  {status === "sending" ? "Sending..." : status === "success" ? "Message Sent!" : status === "error" ? "Error! Check.." : "Send Message"}
+                </Button>
+              </motion.div>
               {status === "success" && (
                 <p className="text-green-500 text-center text-sm mt-2">Thanks! I'll get back to you soon.</p>
               )}
               {status === "error" && (
-                <p className="text-destructive text-center text-sm mt-2">Something went wrong. Please check your Formspree ID or try again later.</p>
+                <p className="text-destructive text-center text-sm mt-2">Something went wrong. Please try again later.</p>
               )}
             </form>
           </motion.div>
