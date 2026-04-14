@@ -78,6 +78,7 @@ export default function Hero() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
+          {/*
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -88,6 +89,7 @@ export default function Hero() {
               Available for new opportunities
             </span>
           </motion.div>
+          */}
 
           <div className="h-[120px] md:h-[200px] flex items-center justify-center mb-8">
             <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tighter leading-[0.9] min-h-[1em]">
